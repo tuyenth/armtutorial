@@ -1,5 +1,4 @@
 
-
 = STM32 Interrupt Vector Table =
 
-|| Table || cell ||
+|| Position || Priority || Type of Priority || Des || Address ||
