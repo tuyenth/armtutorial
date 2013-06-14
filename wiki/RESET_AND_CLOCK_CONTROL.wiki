@@ -28,6 +28,36 @@ Each clock source can be switched on or off independently when it is not used, t
 
 [https://armtutorial.googlecode.com/svn/trunk/image/RCC_MAP.png]
 
+= Example =
+
+{{{
+/*----------------------------------------------------------------------------
+ STM32 clock setup.
+ initializes the RCC register
+ *----------------------------------------------------------------------------*/
+__inline static void stm32_ClockSetup (void) {
+  /* Clock Configuration*/
+
+  RCC->CFGR = __RCC_CFGR_VAL;                        // set clock configuration register
+  RCC->CR   = __RCC_CR_VAL;                          // set clock control register
+
+  if (__RCC_CR_VAL & RCC_CR_HSION) {                 // if HSI enabled
+    while ((RCC->CR & RCC_CR_HSIRDY) == 0);          // Wait for HSIRDY = 1 (HSI is ready)
+  }
+
+  if (__RCC_CR_VAL & RCC_CR_HSEON) {                 // if HSE enabled
+    while ((RCC->CR & RCC_CR_HSERDY) == 0);          // Wait for HSERDY = 1 (HSE is ready)
+  }
+
+  if (__RCC_CR_VAL & RCC_CR_PLLON) {                 // if PLL enabled
+    while ((RCC->CR & RCC_CR_PLLRDY) == 0);          // Wait for PLLRDY = 1 (PLL is ready)
+  }
+
+  /* Wait till SYSCLK is stabilized (depending on selected clock) */
+  while ((RCC->CFGR & RCC_CFGR_SWS) != ((__RCC_CFGR_VAL<<2) & RCC_CFGR_SWS));
+} // end of stm32_ClockSetup
+}}}
+
 
 
 
