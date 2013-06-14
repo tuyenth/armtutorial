@@ -1,4 +1,5 @@
 = STM32 Interrupt Vector Table =
 
-|| Position || Priority || Type of Priority || Des || Address ||
-|| || || || Reserved || 0x0000_0000 ||   
+|| Position || Priority || Type of Priority || Acronym ||Des || Address ||
+|| || || || || Reserved || 0x0000_0000 ||
+|| || || || || Reserved || 0x0000_0000 ||     
