@@ -32,7 +32,6 @@ Each clock source can be switched on or off independently when it is not used, t
 
 [https://armtutorial.googlecode.com/svn/trunk/image/RCC_CR.png] 
 
-
 = Clock Configuration Register (RCC_CFGR) =
 
   ● Offset : 0x04
@@ -41,7 +40,6 @@ Each clock source can be switched on or off independently when it is not used, t
 
 [https://armtutorial.googlecode.com/svn/trunk/image/RCC_CFGR.png]
 
-
 = Clock interrupt register (RCC_CIR) =
 
   ● Offset : 0x08
@@ -49,3 +47,30 @@ Each clock source can be switched on or off independently when it is not used, t
   ● Reset  : 0x0000_0000
 
 [https://armtutorial.googlecode.com/svn/trunk/image/RCC_CIR.png]
+
+= APB2 peripheral reset register (RCC_APB2RSTR) =
+
+  ● Offset : 0x0C
+
+  ● Reset  : 0x0000_0000
+
+[https://armtutorial.googlecode.com/svn/trunk/image/RCC_APB2RSTR.png]
+
+= APB1 peripheral reset register (RCC_APB1RSTR) =
+
+  ● Offset : 0x10
+
+  ● Reset  : 0x0000_0000
+
+[https://armtutorial.googlecode.com/svn/trunk/image/RCC_APB1RSTR.png]
+
+= AHB peripheral clock enable register (RCC_AHBENR) =
+
+  ● Offset : 0x14
+
+  ● Reset  : 0x0000_0014
+
+[https://armtutorial.googlecode.com/svn/trunk/image/RCC_AHBENR.png]
+
+
+
