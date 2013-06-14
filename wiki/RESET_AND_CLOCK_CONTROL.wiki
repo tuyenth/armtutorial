@@ -24,7 +24,7 @@ The devices have the following two secondary clock sources:
 
 Each clock source can be switched on or off independently when it is not used, to optimize power consumption.
 
-= Clock Control Register(RCC_CR) =
+= Clock Control Register (RCC_CR) =
 
   ● Offset : 0x00
 
@@ -32,7 +32,7 @@ Each clock source can be switched on or off independently when it is not used, t
 
 [https://armtutorial.googlecode.com/svn/trunk/image/RCC_CR.png] 
 
-= Clock Configuration Register(RCC_CFGR) =
+= Clock Configuration Register (RCC_CFGR) =
 
   ● Offset : 0x04
 
