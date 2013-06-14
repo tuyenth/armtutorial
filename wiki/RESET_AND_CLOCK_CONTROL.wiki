@@ -31,6 +31,11 @@ Each clock source can be switched on or off independently when it is not used, t
 = Example =
 
 {{{
+
+#define __RCC_CR_VAL               0x01010082
+#define __RCC_CFGR_VAL             0x001D8402
+#define __HSE                      8000000
+
 /*----------------------------------------------------------------------------
  STM32 clock setup.
  initializes the RCC register
