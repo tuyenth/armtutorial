@@ -1,3 +1,7 @@
 = Reset And Clock Control (RCC) =
 
+ Reset circuit
+
+[https://armtutorial.googlecode.com/svn/trunk/image/Reset_Circuit.png]
+
 [https://armtutorial.googlecode.com/svn/trunk/image/Clock_Tree.png]
