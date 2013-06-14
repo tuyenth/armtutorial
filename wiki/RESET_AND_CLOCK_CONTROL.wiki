@@ -22,4 +22,4 @@ The devices have the following two secondary clock sources:
 
   ● 32.768 kHz low speed external crystal (LSE crystal) which optionally drives the realtime clock (RTCCLK)
 
-  Each clock source can be switched on or off independently when it is not used, to optimize power consumption.
+Each clock source can be switched on or off independently when it is not used, to optimize power consumption.
