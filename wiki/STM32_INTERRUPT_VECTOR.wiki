@@ -4,7 +4,7 @@
 [https://armtutorial.googlecode.com/svn/trunk/image/Vector_Table_03.png]
 
 {{{
-    .section	.text.Default_Handler,"ax",%progbits
+.section .text.Default_Handler,"ax",%progbits
 Default_Handler:
 Infinite_Loop:
 	b	Infinite_Loop
@@ -81,7 +81,7 @@ g_pfnVectors:
 	.word	EXTI15_10_IRQHandler
 	.word	RTCAlarm_IRQHandler
 	.word	USBWakeUp_IRQHandler	
-  .word	0
+        .word	0
 	.word	0
 	.word	0
 	.word	0
