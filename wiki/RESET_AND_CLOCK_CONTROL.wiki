@@ -11,5 +11,7 @@
   Three different clock sources can be used to drive the system clock (SYSCLK):
 
   ● HSI oscillator clock
+
   ● HSE oscillator clock
+
   ● PLL clock
