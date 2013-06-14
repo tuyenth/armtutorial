@@ -32,6 +32,7 @@ Each clock source can be switched on or off independently when it is not used, t
 
 [https://armtutorial.googlecode.com/svn/trunk/image/RCC_CR.png] 
 
+
 = Clock Configuration Register (RCC_CFGR) =
 
   ● Offset : 0x04
@@ -39,6 +40,7 @@ Each clock source can be switched on or off independently when it is not used, t
   ● Reset  : 0x0000_0000
 
 [https://armtutorial.googlecode.com/svn/trunk/image/RCC_CFGR.png]
+
 
 = Clock interrupt register (RCC_CIR) =
 
