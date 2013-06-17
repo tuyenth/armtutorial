@@ -4,3 +4,8 @@ A data packet on the wire is called a frame and consists of binary data. Data on
 The table below shows the complete Ethernet frame, as transmitted, for the payload size up to the MTU of 1500 octets.[note 1] Some implementations of Gigabit Ethernet (and higher speed ethernets) support larger frames, known as jumbo frames.
 
 [https://armtutorial.googlecode.com/svn/trunk/image/ETHERNET_Frame-Structure.png]
+
+= Preamble and start frame delimiter =
+
+A frame starts with a 7-octet preamble and 1-octet start frame delimiter (SFD).[note 3] Prior to Fast Ethernet, the on-the-wire bit pattern for this portion of the frame is 10101010 10101010 10101010 10101010 10101010 10101010 10101010 10101011.[3] Since octets are transmitted least-significant bit first the corresponding hexadecimal representation is 0x55 0x55 0x55 0x55 0x55 0x55 0x55 0xD5.
+PHY transceiver chips used for Fast Ethernet feature a 4-bit (one nibble) Media Independent Interface. Therefore the preamble will consist of 14 instances of 0x5, and the start frame delimiter 0x5 0xD. Gigabit Ethernet transceiver chips use a Gigabit Media Independent Interface that works 8-bits at a time, and 10 Gbit/s (XGMII) PHY works with 32-bits at a time.
