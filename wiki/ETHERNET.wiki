@@ -1,4 +1,6 @@
+= Structure =
 
-= Introduction =
+A data packet on the wire is called a frame and consists of binary data. Data on Ethernet is transmitted most-significant octet first. Within each octet, however, the least-significant bit is transmitted first.[1]
+The table below shows the complete Ethernet frame, as transmitted, for the payload size up to the MTU of 1500 octets.[note 1] Some implementations of Gigabit Ethernet (and higher speed ethernets) support larger frames, known as jumbo frames.
 
 [https://armtutorial.googlecode.com/svn/trunk/image/ETHERNET_Frame-Structure.png]
