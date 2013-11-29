@@ -35,6 +35,7 @@
 
  {{{
   $ arm-none-eabi-ld -Ttext=0x08000000 -o add.elf add.o
+  $ arm-none-eabi-nm add.elf 
     08000000 t start
     0800000c t stop
  }}}
@@ -47,4 +48,14 @@
          .text : { * (.text); }
     }
   }}} 
-      
+ 
+ Ký hiệu . được gọi là location pointer, với khai báo như trên, section .text được bắt đầu ở vị trí 0x08000000,  wildcard { * (.text); } biểu thị tập hợp tất cả section .text của các file đối tượng cần link đến.
+
+ {{{
+  $ arm-none-eabi-ld -T script.ld -o add.elf add.o
+  $ arm-none-eabi-nm add.elf 
+    08000000 t start
+    0800000c t stop
+ }}} 
+  
+    
