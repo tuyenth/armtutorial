@@ -8,7 +8,7 @@
 
  Nếu chỉ có source code, trình biên dịch chỉ có thể tạo ra được các file đối tượng (object), thông thường có đuôi .o , để tạo thành file chạy (elf), trình biên dịch sẽ link các file đối tượng này và map chúng vào vùng nhớ vật lý để ARM có thể chạy được. Thông tin phân bố vùng nhớ của ARM được mô tả bởi linker script.
 
- Ví dụ ta có chương trình cộng 2 số (add.s) :
+ Ví dụ ta có chương trình cộng 2 số (add.S) :
 
   {{{
         .text                     @ Code section
@@ -23,7 +23,7 @@
  Build source :
 
   {{{
-  $ arm-none-eabi-as -o add.o add.s
+  $ arm-none-eabi-as -o add.o add.S
   $ arm-none-eabi-nm add.o
     00000000 t start
     0000000c t stop
@@ -58,4 +58,13 @@
     0800000c t stop
  }}} 
   
-    
+= STM32 GNU Project =
+ 
+  Một chương trình đơn giản cho STM32 bao gồm các thành phần sau:
+  
+  - startup_stm32f4xx.S : Startup code.
+  - gcc_arm.ld          : STM32 Linker script. 
+  - system_stm32f4xx.c  : STM32 system init.
+  - main.c              : chương trình ứng dụng.   
+
+  A> Startup code:  
