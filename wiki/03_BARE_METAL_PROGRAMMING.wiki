@@ -63,8 +63,11 @@
   Một chương trình đơn giản cho STM32 bao gồm các thành phần sau:
   
   - startup_stm32f4xx.S : Startup code.
-  - gcc_arm.ld          : STM32 Linker script. 
+
+  - gcc_arm.ld          : STM32 Linker script.
+ 
   - system_stm32f4xx.c  : STM32 system init.
-  - main.c              : chương trình ứng dụng.   
+
+  - main.c              : Chương trình ứng dụng.   
 
   A> Startup code:  
