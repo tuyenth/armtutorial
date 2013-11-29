@@ -84,7 +84,9 @@
   - Thực hiện khởi động hardware (low level init), bao gồm enable cache, CPU clock, peripheral... hoặc gọi đến 1 chương trình con khác để khởi động ngoại vi, ở ví dụ cho STM32, Reset_Handler gọi đến các hàm trong file system_stm32f4xx.c.
 
   - Sau khi thực hiện xong các bước trên Reset_Handler nhảy đến hàm main.
- 
+
+  Phân đoạn stack được khai báo như sau:  
+
    {{{
        .section .stack
        .align 3
@@ -102,5 +104,34 @@
        .size __StackTop, . - __StackTop
    }}}
 
-    
+   Vị trí bắt đầu của stack được biểu thị bởi symbol __StackTop, thông thường vùng stack được bố trí ở địa chỉ cao nhất của RAM. Khi gọi chương trình con, CPU thực hiện đưa dữ liệu tạm thời, con trỏ hiện tại của PC của chương trình, con trỏ stack SP sẽ giảm dần (POP) và tiến đến __StackLimit, khi thoát khỏi chương trình, các thông tin lưu trữ được lấy ra khỏi stack, con trỏ SP sẽ tăng dần và tiến về __StackTop. Hiện tượng tràn stack xảy ra khi con trỏ SP <= __StackLimit và chồng lấn lên các section khác trong RAM.
+
+    __StackTop cũng là giá trị khởi động của SP khi reset hệ thống, cấu trúc ARM cho phép khởi động giá trị ban đầu SP bằng cách gán __StackTop vào giá trị của vector ngắt đầu tiên (ở địa chỉ 0x08000000 đối với STM32).
+
+  Khai báo trương ứng trong linker script : gcc_arm.ld
+
+  {{{
+     MEMORY
+     {
+       FLASH (rx) : ORIGIN = 0x08000000, LENGTH = 2M
+       RAM (rwx)  : ORIGIN = 0x20000000, LENGTH = 16K
+     }
+
+     ...
+
+     /* .stack_dummy section doesn't contains any symbols. It is only
+      * used for linker to calculate size of stack sections, and assign
+      * values to stack symbols later */
+      .stack_dummy :
+      {
+	 *(.stack)
+      } > RAM
+
+     /* Set stack top to end of RAM, and stack limit move down by
+      * size of stack_dummy section */
+      __StackTop = ORIGIN(RAM) + LENGTH(RAM);
+      __StackLimit = __StackTop - SIZEOF(.stack_dummy);
+      PROVIDE(__stack = __StackTop);    
+       
+  }}}   
      
