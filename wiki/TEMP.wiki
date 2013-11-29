@@ -106,7 +106,9 @@
 
    Vị trí bắt đầu của stack được biểu thị bởi symbol __StackTop, thông thường vùng stack được bố trí ở địa chỉ cao nhất của RAM. Khi gọi chương trình con, CPU thực hiện đưa dữ liệu tạm thời, con trỏ hiện tại của PC của chương trình, con trỏ stack SP sẽ giảm dần (POP) và tiến đến __StackLimit, khi thoát khỏi chương trình, các thông tin lưu trữ được lấy ra khỏi stack, con trỏ SP sẽ tăng dần và tiến về __StackTop. Hiện tượng tràn stack xảy ra khi con trỏ SP <= __StackLimit và chồng lấn lên các section khác trong RAM.
 
-    __StackTop cũng là giá trị khởi động của SP khi reset hệ thống, cấu trúc ARM cho phép khởi động giá trị ban đầu SP bằng cách gán __StackTop vào giá trị của vector ngắt đầu tiên (ở địa chỉ 0x08000000 đối với STM32).
+   __StackTop cũng là giá trị khởi động của SP khi reset hệ thống, cấu trúc ARM cho phép khởi động giá trị ban đầu SP bằng cách gán __StackTop vào giá trị của vector ngắt đầu tiên (ở địa chỉ 0x08000000 đối với STM32).
+
+   ASM derective .space Stack_Size thực hiện cấp phát 1 vùng có kích thước Stack_Size cho phân đoạn stack.   
 
   Khai báo trương ứng trong linker script : gcc_arm.ld
 
@@ -118,6 +120,14 @@
      }
 
      ...
+
+      .heap :
+      {
+	__end__ = .;
+	end = __end__;
+	*(.heap*)
+	__HeapLimit = .;
+      } > RAM
 
      /* .stack_dummy section doesn't contains any symbols. It is only
       * used for linker to calculate size of stack sections, and assign
@@ -134,4 +144,26 @@
       PROVIDE(__stack = __StackTop);    
        
   }}}   
-     
+
+   __StackTop nằm ở vị trí cuối cùng của RAM, được gán vào địa chỉ 0x20004000        
+
+  Việc cấp phát vùng heap cũng tương tự
+
+  {{{
+       .section .heap
+       .align 3
+       #ifdef __HEAP_SIZE
+         .equ    Heap_Size, __HEAP_SIZE
+       #else
+         .equ    Heap_Size, 0xC00
+       #endif
+       .globl    __HeapBase
+       .globl    __HeapLimit
+       __HeapBase:
+       .if    Heap_Size
+       .space    Heap_Size
+       .endif
+       .size __HeapBase, . - __HeapBase
+       __HeapLimit:
+       .size __HeapLimit, . - __HeapLimit
+  }}}
