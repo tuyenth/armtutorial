@@ -24,6 +24,10 @@
 
 {{{
   $ arm-none-eabi-as -o add.o add.s
+  $ arm-none-eabi-nm add.o
+    00000000 t start
+    0000000c t stop
 }}}
+
 
       
