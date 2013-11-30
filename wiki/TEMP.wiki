@@ -172,6 +172,45 @@
        .size __HeapLimit, . - __HeapLimit
   }}}
 
+  == Phân đoạn .text ==
+  
+  Phân đoạn bao gồm mã nhị phân chạy chương trình (instruction code...) bao gồm các hằng số (phân đoạn .rodata), các biến có trị khởi động trước (.data) và một số phân đoạn (.ctors), (.dtors)...
+
+  {{{
+    SECTIONS
+    {
+	.text :
+	{
+	   KEEP(*(.isr_vector))
+	   *(.text*)
+
+	   KEEP(*(.init))
+	   KEEP(*(.fini))
+
+	   /* .ctors */
+	   *crtbegin.o(.ctors)
+	   *crtbegin?.o(.ctors)
+	   *(EXCLUDE_FILE(*crtend?.o *crtend.o) .ctors)
+	   *(SORT(.ctors.*))
+	   *(.ctors)
+
+	   /* .dtors */
+ 	    *crtbegin.o(.dtors)
+ 	    *crtbegin?.o(.dtors)
+ 	    *(EXCLUDE_FILE(*crtend?.o *crtend.o) .dtors)
+ 	    *(SORT(.dtors.*))
+ 	    *(.dtors)
+
+	    *(.rodata*)
+
+	    KEEP(*(.eh_frame*))
+	} > FLASH
+       ... 
+    }
+
+  }}}    
+  
+
   == Phân đoạn vector table: ==
 
   {{{
