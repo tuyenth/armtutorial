@@ -1,5 +1,5 @@
-= Bare Metal Programming =
-  Việc tạo project từ zero người ta gọi là bare-metal programming, một chương trình standalone cho ARM tối thiểu phải có 2 thành phần:
+= STM32F4 Bare Metal Program =
+  Project được khởi tạo từ đầu người ta gọi là bare-metal program, một chương trình standalone cho ARM tối thiểu phải có 2 thành phần:
 
 {{{ 
    1> Source code.
