@@ -516,3 +516,27 @@ __isr_vector:
     strlt   r0, [r1], #4   @ *r1 = r0,  r1 = r1 + 4
     blt    .bss_init_loop  @ brand
   }}}
+
+ == Low level Init ==
+
+ Việc khởi động hardware có thể thực hiện bởi các lệnh ASM hoặc để đơn giản ta có thể gọi đến các hàm viết bằng C, cách thực hiện như sau:
+ 
+ {{{
+    ldr    r0, =SystemInit
+    blx    r0
+ }}} 
+ 
+ Trong source C, hàm SystemInit có prototype như sau :
+
+ {{{
+   void SystemInit(void);
+ }}}  
+ 
+ == Nhảy đến hàm main ==
+
+ Tại điểm này Reset_Handler có thể nhảy đến hàm main(), kết thúc quá trình khởi động, cú pháp như sau:
+
+ {{{
+    ldr    r0, =_start
+    bx    r0
+ }}}
