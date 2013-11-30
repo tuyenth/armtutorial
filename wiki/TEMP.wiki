@@ -483,7 +483,7 @@ __isr_vector:
     ittt    lt                  @ if (r2 < r3) then then then   
     ldrlt   r0, [r1], #4        @ r0  = *r1, r1 = r1 + 4 
     strlt   r0, [r2], #4        @ *r2 = r0,  r2 = r2 + 4
-    blt    .flash_to_ram_loop   @ brand if r2 < r3
+    blt    .flash_to_ram_loop   @ brand
   }}}
        
  
