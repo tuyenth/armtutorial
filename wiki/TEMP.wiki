@@ -194,7 +194,7 @@ __isr_vector:
     .long    PendSV_Handler                    /* PendSV Handler */
     .long    SysTick_Handler                   /* SysTick Handler */
 
-                // External Interrupts
+                                               // External Interrupts
     .long    WWDG_IRQHandler                   // Window WatchDog
     .long    PVD_IRQHandler                    // PVD through EXTI Line detection
     .long    TAMP_STAMP_IRQHandler             // Tamper and TimeStamps through the EXTI line
