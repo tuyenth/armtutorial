@@ -322,7 +322,7 @@ __isr_vector:
     .size    __isr_vector, . - __isr_vector
   }}}
 
-  Vector table là một bản chứa các địa chỉ của các trình phục vụ ngắt, khi có sự kiện ngắt (exception), CPU tự động nhảy đến các trình phục vụ ngắt để thực thi các công việc cụ thể. STM32 mặc định map vector table ở vị trí đầu của FLASH 0x08000000 (alias 0x00000000), người dùng có thể remap vector table này đến vị trí khác thông qua thanh ghi VTOR:
+  Vector table là một bảng chứa các địa chỉ của các trình phục vụ ngắt, khi có sự kiện ngắt (exception), CPU tự động nhảy đến các trình phục vụ ngắt để thực thi các công việc cụ thể. STM32 mặc định map vector table ở vị trí đầu của FLASH 0x08000000 (alias 0x00000000), người dùng có thể remap vector table này đến vị trí khác thông qua thanh ghi VTOR:
 
     {{{
     #ifdef VECT_TAB_SRAM
