@@ -547,3 +547,7 @@ __isr_vector:
     ldr  r0, =_start
     bx   r0
  }}}
+
+ == Memory map ==
+
+ [https://code.google.com/p/armtutorial/source/browse/trunk/image/STM32F4_Memory_Map.png]
