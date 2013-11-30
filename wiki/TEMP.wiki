@@ -450,7 +450,25 @@ __isr_vector:
 	    /* All data end */
 	    __data_end__ = .;
 
-	} > RAM  
+	} > RAM
+        ...  
     }
    
-  }}} 
+  }}}
+
+  Symbol __etext = .; 
+
+   Là giá trị LMA, biểu thị điểm cuối của phân đoạn .text, bắt đầu phân đoạn .data nằm trên FLASH.
+
+  Symbol __data_start__ = .;
+
+  Là giá trị VMA, điểm cần chép dữ liệu đến trước khi sử dụng trong chương trình. Khi biên dịch xong, file .map sẽ cho kết quả như sau:
+
+  {{{
+    .data  0x20000000      0x450 load address 0x080009e0
+           0x20000000                __data_start__ = .
+  }}}
+
+  *(vtable) là phân đoạn dùng để remap vector table lên RAM, có thể thay đổi các hàm phục vụ ngắt một cách linh hoạt hơn, ví dụ như bootloader...
+       
+ 
