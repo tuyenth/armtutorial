@@ -304,8 +304,8 @@ __isr_vector:
     .thumb_func
     .weak    \handler_name
     .type    \handler_name, %function
-\handler_name :
-    b    .
+    \handler_name :
+     b    .
     .size    \handler_name, . - \handler_name
     .endm
 
@@ -316,3 +316,27 @@ __isr_vector:
   }}}
 
   Macro định nghĩa các hàm tạm thời với thuộc tính weak, khi có sự kiện ngắt, nếu người dùng ko định nghĩa hàm thay thế thì khi có sự kiện ngắt CPU sẽ bị treo bởi lệnh nhảy loop tại chỗ : b .
+
+  Phân đoạn .isr_vector được layout ở phần đầu của FLASH (tại vị trí VTOR chỉ định), cách khai báo linker script gcc_arm.ld như sau:
+
+  {{{
+    MEMORY
+    {
+      FLASH (rx) : ORIGIN = 0x08000000, LENGTH = 2M
+      RAM (rwx)  : ORIGIN = 0x20000000, LENGTH = 16K
+    }
+    
+    ENTRY(Reset_Handler)
+
+    SECTIONS
+    {
+	.text :
+	{
+	    KEEP(*(.isr_vector))
+	    *(.text*)
+            ... 
+        } > FLASH
+       ... 
+    }
+   
+  }}} 
