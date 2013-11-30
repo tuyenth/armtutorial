@@ -556,7 +556,7 @@ __isr_vector:
  
  Chương trình demo có ở link sau:
 
- [STM32F4_Bare_Metal.rar http://armtutorial.googlecode.com/svn/trunk/src/STM32F4_Bare_Metal.rar]
+ [http://armtutorial.googlecode.com/svn/trunk/src/STM32F4_Bare_Metal.rar STM32F4_Bare_Metal.rar]
 
  Dùng emBlocks IDE để biên dịch, phần mềm có thể download miễn phí trên trang web chính.
 
