@@ -550,4 +550,4 @@ __isr_vector:
 
  == Memory map ==
 
- [https://code.google.com/p/armtutorial/source/browse/trunk/image/STM32F4_Memory_Map.png]
+ [http://code.google.com/p/armtutorial/source/browse/trunk/image/STM32F4_Memory_Map.png]
