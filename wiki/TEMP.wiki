@@ -506,13 +506,13 @@ __isr_vector:
   Đoạn code sau thực hiện khởi động phân đoạn .bss
 
   {{{
-      ldr    r2, =__bss_start__ 
-      ldr    r3, =__bss_end__
+    ldr     r1, =__bss_start__ 
+    ldr     r2, =__bss_end__
       
-      .bss_init_loop:
-      cmp     r2, r3         @ Compare r2 & r3
-      ittt    lt             @ if (r2 < r3) then then then   
-      ldr     r0, =0x0       @ r0 = 0x0
-      strlt   r0, [r2], #4   @ *r2 = r0,  r2 = r2 + 4
-      blt    .bss_init_loop  @ brand
+    .bss_init_loop:
+    cmp     r1, r2         @ Compare r1 & r2
+    ittt    lt             @ if (r1 < r2) then then then   
+    ldr     r0, =0x0       @ r0 = 0x0
+    strlt   r0, [r1], #4   @ *r1 = r0,  r1 = r1 + 4
+    blt    .bss_init_loop  @ brand
   }}}
