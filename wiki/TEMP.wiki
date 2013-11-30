@@ -487,7 +487,8 @@ __isr_vector:
   }}}
        
  == Phân đoạn .bss ==
-
+   
+  {{{
     SECTIONS
     {
         ...  
@@ -500,8 +501,11 @@ __isr_vector:
 	} > RAM
         ... 
     }
+  }}}
 
-   {{{
+  Đoạn code sau thực hiện khởi động phân đoạn .bss
+
+  {{{
       ldr    r2, =__bss_start__ 
       ldr    r3, =__bss_end__
       
@@ -511,4 +515,4 @@ __isr_vector:
       ldr     r0, =0x0       @ r0 = 0x0
       strlt   r0, [r2], #4   @ *r2 = r0,  r2 = r2 + 4
       blt    .bss_init_loop  @ brand
-   }}}
+  }}}
