@@ -151,6 +151,8 @@
 
   == Phân đoạn heap: ==
 
+  Các cấp phát phân đoạn này tương tự như stack:
+
   {{{
        .section .heap
        .align 3
