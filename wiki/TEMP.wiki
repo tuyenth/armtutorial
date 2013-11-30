@@ -474,12 +474,12 @@ __isr_vector:
   Đoạn code sau thực hiện việc chép .data từ FLASH vào RAM
 
   {{{
-    ldr    r1, =__etext
-    ldr    r2, =__data_start__
-    ldr    r3, =__data_end__
+    ldr    r1, =__etext         @ Load LMA 
+    ldr    r2, =__data_start__  @ Load VMA
+    ldr    r3, =__data_end__    @ End of .data in RAM
 
     .flash_to_ram_loop:
-    cmp     r2, r3
+    cmp     r2, r3              @ Compare r2 & r3
     ittt    lt
     ldrlt   r0, [r1], #4
     strlt   r0, [r2], #4
