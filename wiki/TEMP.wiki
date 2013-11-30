@@ -85,7 +85,7 @@
 
   - Sau khi thực hiện xong các bước trên Reset_Handler nhảy đến hàm main.
 
-  Phân đoạn stack được khai báo như sau:  
+  == Phân đoạn stack: ==  
 
    {{{
        .section .stack
@@ -149,7 +149,7 @@
 
    __StackTop nằm ở vị trí cuối cùng của RAM, được gán vào địa chỉ 0x20004000        
 
-  Việc cấp phát vùng heap cũng tương tự
+  == Phân đoạn heap: ==
 
   {{{
        .section .heap
@@ -170,7 +170,7 @@
        .size __HeapLimit, . - __HeapLimit
   }}}
 
-  Phân đoạn vector table:
+  == Phân đoạn vector table: ==
 
   {{{
 .section .isr_vector
@@ -351,3 +351,5 @@ __isr_vector:
   }}}
 
   Phân đoạn .text có kích thước 0x9d8, và phân đoạn .isr_sector được bắt đầu ở địa chỉ 0x08000000.
+
+  == Phân đoạn data ==
