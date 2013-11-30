@@ -469,6 +469,7 @@ __isr_vector:
            0x20000000                __data_start__ = .
   }}}
 
-  *(vtable) là phân đoạn dùng để remap vector table lên RAM, có thể thay đổi các hàm phục vụ ngắt một cách linh hoạt hơn, ví dụ như bootloader...
+  {{{ *(vtable) }}} là phân đoạn dùng để remap vector table lên RAM, có thể thay đổi các hàm phục vụ ngắt một cách linh hoạt hơn, ví dụ như bootloader...
+
        
  
