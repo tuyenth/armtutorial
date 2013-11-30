@@ -340,3 +340,14 @@ __isr_vector:
     }
    
   }}} 
+
+  Sau đây là nội dung của file .map sau khi biên dịch thành công :
+
+  {{{
+      .text          0x08000000      0x9d8
+      *(.isr_vector)
+      .isr_vector    0x08000000      0x188 obj\debug\startup_stm32f4xx.o
+                     0x08000000                __isr_vector
+  }}}
+
+  Phân đoạn .text có kích thước 0x9d8, và phân đoạn .isr_sector được bắt đầu ở địa chỉ 0x08000000.
