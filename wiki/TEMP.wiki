@@ -290,3 +290,5 @@ __isr_vector:
         SCB->VTOR = FLASH_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal FLASH */
     #endif
     }}}
+
+ Trong đó VECT_TAB_OFFSET (bội số của 0x200) là giá trị offset mà chúng ta cần di chuyển vector table tới.
