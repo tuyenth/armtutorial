@@ -471,5 +471,19 @@ __isr_vector:
 
   {{{ *(vtable) }}} là phân đoạn dùng để remap vector table lên RAM, có thể thay đổi các hàm phục vụ ngắt một cách linh hoạt hơn, ví dụ như bootloader...
 
+  Đoạn code sau thực hiện việc chép .data từ FLASH vào RAM
+
+  {{{
+    ldr    r1, =__etext
+    ldr    r2, =__data_start__
+    ldr    r3, =__data_end__
+
+    .flash_to_ram_loop:
+    cmp     r2, r3
+    ittt    lt
+    ldrlt   r0, [r1], #4
+    strlt   r0, [r2], #4
+    blt    .flash_to_ram_loop
+  }}}
        
  
