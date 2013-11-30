@@ -537,6 +537,13 @@ __isr_vector:
  Tại điểm này Reset_Handler có thể nhảy đến hàm main(), kết thúc quá trình khởi động, cú pháp như sau:
 
  {{{
-    ldr    r0, =_start
-    bx    r0
+    ldr  r0, =main
+    bx   r0
+ }}}
+
+ Đôi khi hàm main được gọi gián tiếp thông qua hàm _start(), hàm này có trong thư viện chuẩn của C (crt0.o) :
+ 
+ {{{
+    ldr  r0, =_start
+    bx   r0
  }}}
