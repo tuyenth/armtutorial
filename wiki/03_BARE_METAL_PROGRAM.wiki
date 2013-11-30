@@ -548,6 +548,17 @@ __isr_vector:
     bx   r0
  }}}
 
- == Memory map ==
+ == STM32F4 memory map ==
 
  [http://armtutorial.googlecode.com/svn/trunk/image/STM32F4_Memory_Map.png]
+
+ == Chương trình demo ==
+ 
+ Chương trình demo có ở link sau:
+
+ [STM32F4_Bare_Metal.rar http://armtutorial.googlecode.com/svn/trunk/src/STM32F4_Bare_Metal.rar]
+
+ Dùng emBlocks IDE để biên dịch, phần mềm có thể download miễn phí trên trang web chính.
+
+ [http://www.emblocks.org/web/]
+ 
