@@ -393,7 +393,7 @@ __isr_vector:
 
   Phân đoạn .text có kích thước 0x9d8, và phân đoạn .isr_sector được bắt đầu ở địa chỉ 0x08000000.
 
-  == Phân đoạn data ==
+  == Phân đoạn .data ==
 
   Phân đoạn .data bắt đầu từ cuối phân đoạn .text (LMA), và nằm trong vùng RAM lúc chạy chương trình (VMA), cú pháp sau biểu thị trường hợp LMA khác với VMA khi chạy chương trình.
 
@@ -486,4 +486,29 @@ __isr_vector:
     blt    .flash_to_ram_loop   @ brand
   }}}
        
- 
+ == Phân đoạn .bss ==
+
+    SECTIONS
+    {
+        ...  
+	.bss :
+	{
+	    __bss_start__ = .;
+	    *(.bss*)
+	    *(COMMON)
+	    __bss_end__ = .;
+	} > RAM
+        ... 
+    }
+
+   {{{
+      ldr    r2, =__bss_start__ 
+      ldr    r3, =__bss_end__
+      
+      .bss_init_loop:
+      cmp     r2, r3         @ Compare r2 & r3
+      ittt    lt             @ if (r2 < r3) then then then   
+      ldr     r0, =0x0       @ r0 = 0x0
+      strlt   r0, [r2], #4   @ *r2 = r0,  r2 = r2 + 4
+      blt    .bss_init_loop  @ brand
+   }}}
