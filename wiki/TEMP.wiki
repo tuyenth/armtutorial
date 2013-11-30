@@ -291,4 +291,28 @@ __isr_vector:
     #endif
     }}}
 
- Trong đó VECT_TAB_OFFSET (bội số của 0x200) là giá trị offset mà chúng ta cần di chuyển vector table tới.
+ Trong đó VECT_TAB_OFFSET (bội số của 0x200) là giá trị offset mà chúng ta cần di chuyển vector table đến.
+
+  Ở khai báo phân đoạn .isr_vector trên, mỗi vector có giá trị được gán bởi địa chỉ hàm phục vụ ngắt được gọi đến, trình biên dịch cho phép ta tạm thời định nghĩa các hàm này (dành chỗ trước) với thuộc tính weak, khi người dùng muốn định nghĩa lại các hàm này, có thể thực thi ở các source .c, trình biên dịch sẽ tự động thay thế nội dung các hàm tạm thời bởi các hàm của người dùng. Các hàm tạm thời được khai báo với cú pháp sau:
+
+  {{{
+    /* Macro to define default handlers. Default handler
+     * will be weak symbol and just dead loops. They can be
+     * overwritten by other handlers */
+    .macro    def_irq_handler    handler_name
+    .align 1
+    .thumb_func
+    .weak    \handler_name
+    .type    \handler_name, %function
+\handler_name :
+    b    .
+    .size    \handler_name, . - \handler_name
+    .endm
+
+    def_irq_handler    NMI_Handler
+    def_irq_handler    HardFault_Handler
+    def_irq_handler    MemManage_Handler
+    .... 
+  }}}
+
+  Macro định nghĩa các hàm tạm thời với thuộc tính weak, khi có sự kiện ngắt, nếu người dùng ko định nghĩa hàm thay thế thì khi có sự kiện ngắt CPU sẽ bị treo bởi lệnh nhảy loop tại chỗ : b .
