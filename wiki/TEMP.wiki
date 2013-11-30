@@ -395,7 +395,7 @@ __isr_vector:
 
   == Phân đoạn .data ==
 
-  Phân đoạn .data bắt đầu từ cuối phân đoạn .text (LMA), và nằm trong vùng RAM lúc chạy chương trình (VMA), cú pháp sau biểu thị trường hợp LMA khác với VMA khi chạy chương trình.
+  Phân đoạn .data bắt đầu từ cuối phân đoạn .text (LMA), và nằm trong vùng RAM lúc chạy chương trình (VMA), cú pháp AT biểu thị trường hợp LMA khác với VMA khi chạy chương trình.
 
  
   {{{
