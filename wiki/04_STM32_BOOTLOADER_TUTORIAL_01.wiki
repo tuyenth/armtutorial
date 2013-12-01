@@ -1,6 +1,6 @@
 #summary One-sentence summary of this page.
 
-= XÂY DỰNG BOOTLOADER ĐƠN GIẢN =
+= XÂY DỰNG BOOTLOADER CHO ARM =
 
  Sử dụng [https://code.google.com/p/armtutorial/wiki/03_BARE_METAL_PROJECT STM32_BARE_METAL_PROJECT] thay đổi một chút ít ta có thể tạo ra được một chương trình bootloader đơn giản.
 
@@ -174,5 +174,5 @@
 
 = DOWNLOAD CHƯƠNG TRÌNH DEMO =
   
-   
+ [http://armtutorial.googlecode.com/svn/trunk/src/STF32F4_Bootloader_Tutorial_01.rar STF32F4_Bootloader_Tutorial_01.rar] 
        
