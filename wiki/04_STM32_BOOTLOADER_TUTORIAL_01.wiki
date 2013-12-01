@@ -92,5 +92,12 @@
  
   Một điểm cần lưu ý rằng, giá trị tại ô nhớ tại vị trí {{{__image_addr}}} không phải là entry point({{{Reset_Handler}}}) của ứng dụng, nó thật sự là giá trị con trỏ stack pointer (SP). Giá trị ô nhớ tại vị trí {{{(__image_addr + 4)}}} mới đúng là vị trí của hàm {{{Reset_Handler}}}. Việc nhảy đến hàm này có thể xem như sự kiện reset giả lập sự kiện reset theo cách nhìn của chương trình ứng dụng.
 
+= CHƯƠNG TRÌNH ỨNG DỤNG =
+
+  Hoàn toàn tương tự [https://code.google.com/p/armtutorial/wiki/03_BARE_METAL_PROJECT STM32_BARE_METAL_PROJECT], riêng phần linker script cần thay đổi vị trí ban đầu của FLASH.
+
+  {{{
+
+  }}}
   
  
