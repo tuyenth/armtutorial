@@ -158,7 +158,7 @@
 
 = CHẠY CHƯƠNG TRÌNH =
 
-  1> Board demo : STM32F429 DISCO 
+  1> Sử dụng STM32F429 DISCO cho demo 
 
   2> Biên dịch và load chương trình "STM32F4_Bootloader_01" (Sử dụng công cụ debug của emBlocks)
 
