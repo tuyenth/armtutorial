@@ -147,7 +147,7 @@
        
   }}}   
 
-   __StackTop nằm ở vị trí cuối cùng của RAM, được gán vào địa chỉ 0x20004000        
+   {{{__StackTop}}} nằm ở vị trí cuối cùng của RAM, được gán vào địa chỉ 0x20004000        
 
   == Phân đoạn heap: ==
 
