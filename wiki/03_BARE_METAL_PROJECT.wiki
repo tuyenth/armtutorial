@@ -71,19 +71,19 @@
 
   A> Startup code:
 
-  Khi có sự kiện reset, trình phục vụ ngắt {{{Reset_Handler}}} sẽ được thực thi, Reset_Handler thực hiện các tác vụ sau:
+  Khi có sự kiện reset, trình phục vụ ngắt {{{Reset_Handler}}} sẽ được thực thi, {{{Reset_Handler}}} thực hiện các tác vụ sau:
 
   - Copy .data section từ FLASH sang RAM, .data section là phân đoạn chứa các biến được khởi động trị lúc khai báo (ví dụ: char c = 'a';), do RAM là bộ nhớ mất dữ liệu khi tắt nguồn điện vì vậy các trị khởi động trước này được lưu trữ vào bộ nhớ FLASH, ROM... {{{Reset_Handler}}} copy phân vùng này sang RAM trước khi thực thi các chương trình. Địa chỉ bắt đầu chứa phân vùng data trong FLASH được gọi là LMA (Load Memory Address), địa chỉ đầu tiên cần copy đến RAM được gọi là run-time address hoặc là VMA (Virtual Memory Address).
   
-  - Khởi động các biến trên vùng .bss , vùng này nằm trên RAM đây là vùng chứa các biến không khởi động trị trong lúc khai báo (ví dụ : int d;), Reset_Handler thực thi việc xóa các biến này về zero. Đây là thao tác option, Reset_Handler có thể thự hiện hoặc không. Vì thế, chúng ta cần lưu ý không được hiểu nhầm khi một biến mới cấp phát có giá trị = zero là do trình biên dịch thực hiện. Một số trình biên dịch thông minh sẽ cho ra cảnh báo nếu ta vô tình lấy giá trị của một biến không được khởi động trước.
+  - Khởi động các biến trên vùng .bss , vùng này nằm trên RAM đây là vùng chứa các biến không khởi động trị trong lúc khai báo (ví dụ : int d;), {{{Reset_Handler}}} thực thi việc xóa các biến này về zero. Đây là thao tác option, {{{Reset_Handler}}} có thể thự hiện hoặc không. Vì thế, chúng ta cần lưu ý không được hiểu nhầm khi một biến mới cấp phát có giá trị = zero là do trình biên dịch thực hiện. Một số trình biên dịch thông minh sẽ cho ra cảnh báo nếu ta vô tình lấy giá trị của một biến không được khởi động trước.
 
   - Khởi tạo con trỏ stack (SP).
 
   - Khởi tạp vùng heap (nếu chương trình có sử dụng thư viện cấp phát bộ nhớ động dynamic memory allocation)
   
-  - Thực hiện khởi động hardware (low level init), bao gồm enable cache, CPU clock, peripheral... hoặc gọi đến 1 chương trình con khác để khởi động ngoại vi, ở ví dụ cho STM32, Reset_Handler gọi đến các hàm trong file system_stm32f4xx.c.
+  - Thực hiện khởi động hardware (low level init), bao gồm enable cache, CPU clock, peripheral... hoặc gọi đến 1 chương trình con khác để khởi động ngoại vi, ở ví dụ cho STM32, {{{Reset_Handler}}} gọi đến các hàm trong file system_stm32f4xx.c.
 
-  - Sau khi thực hiện xong các bước trên Reset_Handler nhảy đến hàm main.
+  - Sau khi thực hiện xong các bước trên {{{Reset_Handler}}} nhảy đến hàm main.
 
   == Phân đoạn stack: ==  
 
@@ -104,9 +104,9 @@
        .size __StackTop, . - __StackTop
    }}}
 
-   Vị trí bắt đầu của stack được biểu thị bởi symbol __StackTop, thông thường vùng stack được bố trí ở địa chỉ cao nhất của RAM. Khi gọi chương trình con, CPU thực hiện lưu dữ liệu tạm thời, con trỏ hiện tại của PC của chương trình vào stack, con trỏ stack SP sẽ giảm dần (PUSH) và tiến đến __StackLimit, khi thoát khỏi chương trình, các thông tin lưu trữ được lấy ra khỏi stack, con trỏ SP sẽ tăng dần và tiến về __StackTop. Hiện tượng tràn stack xảy ra khi con trỏ SP <= __StackLimit và chồng lấn lên các section khác trong RAM.
+   Vị trí bắt đầu của stack được biểu thị bởi symbol {{{__StackTop}}}, thông thường vùng stack được bố trí ở địa chỉ cao nhất của RAM. Khi gọi chương trình con, CPU thực hiện lưu dữ liệu tạm thời, con trỏ hiện tại của PC của chương trình vào stack, con trỏ stack SP sẽ giảm dần (PUSH) và tiến đến {{{__StackLimit}}}, khi thoát khỏi chương trình, các thông tin lưu trữ được lấy ra khỏi stack, con trỏ SP sẽ tăng dần và tiến về {{{__StackTop}}}. Hiện tượng tràn stack xảy ra khi con trỏ SP <= {{{__StackLimit}}} và chồng lấn lên các section khác trong RAM.
 
-   __StackTop cũng là giá trị khởi động của SP khi reset hệ thống, cấu trúc ARM cho phép khởi động giá trị ban đầu SP bằng cách gán __StackTop vào giá trị của vector ngắt đầu tiên (ở địa chỉ 0x08000000 đối với STM32).
+   {{{__StackTop}}} cũng là giá trị khởi động của SP khi reset hệ thống, cấu trúc ARM cho phép khởi động giá trị ban đầu SP bằng cách gán {{{__StackTop}}} vào giá trị của vector ngắt đầu tiên (ở địa chỉ 0x08000000 đối với STM32).
 
    ASM derective .space Stack_Size thực hiện cấp phát 1 vùng có kích thước Stack_Size cho phân đoạn stack.   
 
