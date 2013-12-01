@@ -164,5 +164,15 @@
 
   3> Biên dịch và load chương trình "STM32F4_Application_01"
 
-  Khi chương trình bootloader chạy, hàm main khởi động và tắt 2 đèn LED3  
-  (Green) và LED4 (Red)  
+  Sau khi nhấn nút reset, chương trình bootloader chạy, hàm main khởi động và tắt 2 đèn LED3 (green) và LED4 (red), sau đó nhảy đến chương trình ứng dụng. Hàm main của chương trình ứng dụng bật LED3 và tắt LED4, đồng thời khởi tạo trình phục vụ ngắt ngoài EXTI0 (User Button).
+
+  Như vậy: 
+   
+   - Nếu bootloader khởi động được chương trình ứng dụng, thì đèn LED3 (green) sẽ sáng.
+
+   - Nếu việc remap interrupt vector, khởi tạo ngắt đúng, khi ấn và nhả nút User Button thì đèn LED4 (red) sẽ đổi trạng thái (toggle).
+
+= DOWNLOAD CHƯƠNG TRÌNH DEMO =
+  
+   
+       
