@@ -534,7 +534,7 @@ __isr_vector:
  
  == Nhảy đến hàm main () ==
 
- Tại điểm này Reset_Handler có thể nhảy đến hàm main(), kết thúc quá trình khởi động, cú pháp như sau:
+ Tại điểm này {{{Reset_Handler}}} có thể nhảy đến hàm main(), kết thúc quá trình khởi động, cú pháp như sau:
 
  {{{
     ldr  r0, =main
