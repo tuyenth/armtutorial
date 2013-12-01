@@ -71,9 +71,9 @@
 
   A> Startup code:
 
-  Khi có sự kiện reset, trình phục vụ ngắt Reset_Handler sẽ được thực thi, Reset_Handler thực hiện các tác vụ sau:
+  Khi có sự kiện reset, trình phục vụ ngắt {{{Reset_Handler}}} sẽ được thực thi, Reset_Handler thực hiện các tác vụ sau:
 
-  - Copy .data section từ FLASH sang RAM, .data section là phân đoạn chứa các biến được khởi động trị lúc khai báo (ví dụ: char c = 'a';), do RAM là bộ nhớ mất dữ liệu khi tắt nguồn điện vì vậy các trị khởi động trước này được lưu trữ vào bộ nhớ FLASH, ROM... Reset_Handler copy phân vùng này sang RAM trước khi thực thi các chương trình. Địa chỉ bắt đầu chứa phân vùng data trong FLASH được gọi là LMA (Load Memory Address), địa chỉ đầu tiên cần copy đến RAM được gọi là run-time address hoặc là VMA (Virtual Memory Address).
+  - Copy .data section từ FLASH sang RAM, .data section là phân đoạn chứa các biến được khởi động trị lúc khai báo (ví dụ: char c = 'a';), do RAM là bộ nhớ mất dữ liệu khi tắt nguồn điện vì vậy các trị khởi động trước này được lưu trữ vào bộ nhớ FLASH, ROM... {{{Reset_Handler}}} copy phân vùng này sang RAM trước khi thực thi các chương trình. Địa chỉ bắt đầu chứa phân vùng data trong FLASH được gọi là LMA (Load Memory Address), địa chỉ đầu tiên cần copy đến RAM được gọi là run-time address hoặc là VMA (Virtual Memory Address).
   
   - Khởi động các biến trên vùng .bss , vùng này nằm trên RAM đây là vùng chứa các biến không khởi động trị trong lúc khai báo (ví dụ : int d;), Reset_Handler thực thi việc xóa các biến này về zero. Đây là thao tác option, Reset_Handler có thể thự hiện hoặc không. Vì thế, chúng ta cần lưu ý không được hiểu nhầm khi một biến mới cấp phát có giá trị = zero là do trình biên dịch thực hiện. Một số trình biên dịch thông minh sẽ cho ra cảnh báo nếu ta vô tình lấy giá trị của một biến không được khởi động trước.
 
