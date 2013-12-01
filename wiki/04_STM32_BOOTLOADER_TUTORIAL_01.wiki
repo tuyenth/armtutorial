@@ -12,8 +12,6 @@
     #define IMAGE_ADDR           (FLASH_BASE + BOOTLOADER_MAX_SIZE) /* Vùng ứng dụng       */              
  }}}
 
- Linker script của bootloader tương tự với [https://code.google.com/p/armtutorial/wiki/03_BARE_METAL_PROJECT STM32_BARE_METAL_PROJECT], ở phần khai báo memory, nên giới hạn tham số LENGTH của FLASH để ta có thể kiểm soát được trường hợp code size của bootloader bị tràng và overlapse với vùng ứng dụng.
-
 {{{
 
    PROVIDE(__image_addr = 0x08010000);
@@ -38,4 +36,5 @@
         ...  
    }
 }}} 
-  
+ 
+  Linker script của bootloader tương tự với [https://code.google.com/p/armtutorial/wiki/03_BARE_METAL_PROJECT STM32_BARE_METAL_PROJECT], ở phần khai báo memory, nên giới hạn tham số LENGTH của FLASH để ta có thể kiểm soát được trường hợp code size của bootloader bị tràng và overlapse với vùng ứng dụng. 
