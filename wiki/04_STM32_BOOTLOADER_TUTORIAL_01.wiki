@@ -62,4 +62,32 @@
      extern long __image_addr;
      SCB->VTOR = __image_addr;  
   }}}
+
+== 3> main.c ==
+  
+  Chương trình chính, bootloader có thể thực hiện một số thao tác trước khi nhảy đến ứng dụng, ví dụ như kiểm tra điều kiện update firmware có thỏa mãn hay không:
+      
+  + Nếu không thỏa mãn điều kiện update (ứng dụng mới nhất): bootloader sẽ nhảy đến thực thi chương trình ứng dụng.     
+
+  + Nếu thỏa mãn điều kiện update : Sau khi được sự đồng ý của người dùng, bootloader sẽ load firmware (binary, hex files...) từ các thiết bị nhớ, SD card, SPI Nor Flash, thông qua UART, Ethernet, CAN... Sau đó lập trình firmware vào FLASH và tiến hành chạy ứng dụng.
+
+  Ở demo đơn giản này bootloader sẽ nhảy thẳng đến chương trình ứng dụng, với mục đích kiểm chứng việc khởi tạo các thành phần trên STM32F4 có thành công hay không.
+
+  Để chương trình nhảy đến một vị trí trên vùng nhớ có mã thực thi, ta có thể sử dụng đoạn code với cú pháp sau:
+
+   
+ {{{
+   int main(void) 
+   {
+     ...
+     
+   /* Jump to application */
+   asm( "ldr   r1, =(__image_addr + 4) \n\t"
+        "ldr   r0, [r1] \n\t"
+        "bx    r0" );
+     
+     return 0; 
+   }
+ }}}  
  
+  
