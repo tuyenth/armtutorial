@@ -104,7 +104,7 @@
        .size __StackTop, . - __StackTop
    }}}
 
-   Vị trí bắt đầu của stack được biểu thị bởi symbol __StackTop, thông thường vùng stack được bố trí ở địa chỉ cao nhất của RAM. Khi gọi chương trình con, CPU thực hiện lưu dữ liệu tạm thời, con trỏ hiện tại của PC của chương trình vào stack, con trỏ stack SP sẽ giảm dần (POP) và tiến đến __StackLimit, khi thoát khỏi chương trình, các thông tin lưu trữ được lấy ra khỏi stack, con trỏ SP sẽ tăng dần và tiến về __StackTop. Hiện tượng tràn stack xảy ra khi con trỏ SP <= __StackLimit và chồng lấn lên các section khác trong RAM.
+   Vị trí bắt đầu của stack được biểu thị bởi symbol __StackTop, thông thường vùng stack được bố trí ở địa chỉ cao nhất của RAM. Khi gọi chương trình con, CPU thực hiện lưu dữ liệu tạm thời, con trỏ hiện tại của PC của chương trình vào stack, con trỏ stack SP sẽ giảm dần (PUSH) và tiến đến __StackLimit, khi thoát khỏi chương trình, các thông tin lưu trữ được lấy ra khỏi stack, con trỏ SP sẽ tăng dần và tiến về __StackTop. Hiện tượng tràn stack xảy ra khi con trỏ SP <= __StackLimit và chồng lấn lên các section khác trong RAM.
 
    __StackTop cũng là giá trị khởi động của SP khi reset hệ thống, cấu trúc ARM cho phép khởi động giá trị ban đầu SP bằng cách gán __StackTop vào giá trị của vector ngắt đầu tiên (ở địa chỉ 0x08000000 đối với STM32).
 
