@@ -16,25 +16,26 @@
 
 {{{
 
-PROVIDE(__image_addr = 0x08010000);
+   PROVIDE(__image_addr = 0x08010000);
 
-MEMORY
-{
-  FLASH (rx) : ORIGIN = 0x08000000, LENGTH = 64K
-  RAM (rwx)  : ORIGIN = 0x20000000, LENGTH = 16K
-}
+   MEMORY
+   {
+     FLASH (rx) : ORIGIN = 0x08000000, LENGTH = 64K
+     RAM (rwx)  : ORIGIN = 0x20000000, LENGTH = 16K
+   }
 
-ENTRY(Reset_Handler)
+   ENTRY(Reset_Handler)
 
-SECTIONS
-{
-	.text :
-	{
-		KEEP(*(.isr_vector))
+   SECTIONS
+   {
+      .text :
+      {
+	KEEP(*(.isr_vector))
         *(.text*)
 
-		KEEP(*(.init))
-		KEEP(*(.fini))
+	KEEP(*(.init))
+	KEEP(*(.fini))
         ...  
-}
-}}}   
+   }
+}}} 
+  
