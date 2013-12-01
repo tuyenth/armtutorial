@@ -173,7 +173,6 @@
    - Nếu việc remap interrupt vector, khởi tạo ngắt đúng, khi ấn và nhả nút User Button thì đèn LED4 (red) sẽ đổi trạng thái (toggle).
 
    - Đây là demo đơn giản, bootloader hoàn chỉnh cần phải có tính năng load và program firmware vào FLASH cho STM32, hy vọng chúng ta sẽ có cơ hội phát triển thêm trong thời gian tới.  
-
       [http://armtutorial.googlecode.com/svn/trunk/image/STM32F429DISCO.png]
 
 = DOWNLOAD CHƯƠNG TRÌNH DEMO =
