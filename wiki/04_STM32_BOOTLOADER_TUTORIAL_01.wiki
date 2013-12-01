@@ -46,3 +46,7 @@
 }}}
 
  Tạo một symbol có tên là {{{__image_addr}}} đánh dấu vị trí 0x08010000 cho vùng ứng dụng. Việc tạo symbol này tạo nên tính tiện dụng, các source trong chương trình bootloader có thể tham chiếu đến symbol này mà ko cần phải khai báo ở các header file hoặc {{{#define}}}...
+
+ == 2> startup_stm32f4xx.S ==
+ 
+ Hoàn toàn tương tự với [https://code.google.com/p/armtutorial/wiki/03_BARE_METAL_PROJECT STM32_BARE_METAL_PROJECT]
