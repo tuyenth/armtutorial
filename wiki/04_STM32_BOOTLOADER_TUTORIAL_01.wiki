@@ -2,4 +2,4 @@
 
 = XÂY DỰNG BOOTLOADER ĐƠN GIẢN =
 
-  Phần này chúng ta tìm hiểu cách xây dựng chương trình bootloader đơn giản cho STM32. Sử dụng  [https://code.google.com/p/armtutorial/wiki/03_BARE_METAL_PROJECT STM32_BARE_METAL_PROJECT] thay đổi một chút ít ta có thể tạo ra được một chương trình bootloader đơn giản.
+ Sử dụng [https://code.google.com/p/armtutorial/wiki/03_BARE_METAL_PROJECT STM32_BARE_METAL_PROJECT] thay đổi một chút ít ta có thể tạo ra được một chương trình bootloader đơn giản.
