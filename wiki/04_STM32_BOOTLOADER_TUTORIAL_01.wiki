@@ -12,7 +12,7 @@
     #define IMAGE_ADDR           (FLASH_BASE + BOOTLOADER_MAX_SIZE) /* Vùng ứng dụng       */              
  }}}
 
- gcc_arm.ld :
+ == 1> gcc_arm.ld : ==
 
 {{{
 
