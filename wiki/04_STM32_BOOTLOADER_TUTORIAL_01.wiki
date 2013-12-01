@@ -7,9 +7,9 @@
   Trên bộ nhớ FLASH của STM32, bootloader được thiết kế với phần code không vượt quá 64K bắt đầu ở vi trí 0x08000000. Kế đến là chương trình ứng dụng, ta định nghĩa các tham số như sau:
 
  {{{
-    #define FLASH_BASE           0x08000000
+    #define FLASH_BASE           0x08000000 /* Vùng cho bootloader */ 
     #define BOOTLOADER_MAX_SIZE  0x00010000 /* 64K */
-    #define IMAGE_ADDR           (FLASH_BASE + BOOTLOADER_MAX_SIZE)              
+    #define IMAGE_ADDR           (FLASH_BASE + BOOTLOADER_MAX_SIZE) /* Vùng ứng dụng */              
  }}}
 
- Linker script của bootloader hoàn toàn tương tự với [https://code.google.com/p/armtutorial/wiki/03_BARE_METAL_PROJECT STM32_BARE_METAL_PROJECT] 
+ Linker script của bootloader hoàn toàn tương tự với [https://code.google.com/p/armtutorial/wiki/03_BARE_METAL_PROJECT STM32_BARE_METAL_PROJECT], ở phần khai báo memory, nên giới hạn tham số LENGTH của FLASH để ta có thể kiểm soát được trường hợp code size của bootloader bị tràng và overlapse với vùng ứng dụng.   
