@@ -174,7 +174,7 @@
 
    - Đây là demo đơn giản, bootloader hoàn chỉnh cần phải có tính năng load và program firmware vào FLASH cho STM32, hy vọng chúng ta sẽ có cơ hội phát triển thêm trong thời gian tới.  
 
-[http://armtutorial.googlecode.com/svn/trunk/image/STM32F429DISCO.png]
+      [http://armtutorial.googlecode.com/svn/trunk/image/STM32F429DISCO.png]
 
 = DOWNLOAD CHƯƠNG TRÌNH DEMO =
   
