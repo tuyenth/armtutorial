@@ -51,4 +51,15 @@
 
  == 2> startup_stm32f4xx.S ==
  
- Hoàn toàn tương tự với [https://code.google.com/p/armtutorial/wiki/03_BARE_METAL_PROJECT STM32_BARE_METAL_PROJECT]
+  Hoàn toàn tương tự với [https://code.google.com/p/armtutorial/wiki/03_BARE_METAL_PROJECT STM32_BARE_METAL_PROJECT]
+
+ == 3> system_stm32f4xx.c == 
+  
+  Lowlevel init, sau khi khởi động CPU clock, ngoại vi... Ta cần map interrupt vector table đến vị trí đầu của chương trình ứng dụng:
+
+  {{{
+     /* Do remap interrupt vector */
+     extern long __image_addr;
+     SCB->VTOR = __image_addr;  
+  }}}
+ 
