@@ -7,8 +7,8 @@
   Trên bộ nhớ FLASH của STM32, bootloader được thiết kế với phần code không vượt quá 64K bắt đầu ở vi trí 0x08000000. Kế đến là chương trình ứng dụng, ta định nghĩa các tham số như sau:
 
  {{{
-    #define FLASH_BASE           0x08000000 /* Vùng cho bootloader */ 
-    #define BOOTLOADER_MAX_SIZE  0x00010000 /* 64K */
+    #define FLASH_BASE           0x08000000                         /* Vùng cho bootloader */ 
+    #define BOOTLOADER_MAX_SIZE  0x00010000                         /* 64K */
     #define IMAGE_ADDR           (FLASH_BASE + BOOTLOADER_MAX_SIZE) /* Vùng ứng dụng */              
  }}}
 
