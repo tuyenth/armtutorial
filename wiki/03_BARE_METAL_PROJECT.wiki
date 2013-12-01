@@ -526,7 +526,7 @@ __isr_vector:
     blx    r0
  }}} 
  
- Trong source C, hàm SystemInit có prototype như sau :
+ Trong source C, hàm {{{SystemInit}}} có prototype như sau :
 
  {{{
    void SystemInit(void);
