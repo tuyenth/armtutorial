@@ -90,4 +90,7 @@
    }
  }}}  
  
+  Một điểm cần lưu ý rằng, giá trị tại ô nhớ tại vị trí __image_addr không phải là entry point(Reset_Handler) của ứng dụng, nó thật sự là giá trị con trỏ stack pointer (SP). Giá trị ô nhớ tại vị trí {{{(__image_addr + 4)}}} mới đúng là vị trí của hàm {{{Reset_Handler}}} của chương trình ứng dụng. Việc nhảy đến hàm này có thể xem như sự kiện reset giả lập sự kiện reset theo cách nhìn của chương trình ứng dụng.
+
   
+ 
