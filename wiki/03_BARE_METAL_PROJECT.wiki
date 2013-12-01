@@ -108,7 +108,7 @@
 
    {{{__StackTop}}} cũng là giá trị khởi động của SP khi reset hệ thống, cấu trúc ARM cho phép khởi động giá trị ban đầu SP bằng cách gán {{{__StackTop}}} vào giá trị của vector ngắt đầu tiên (ở địa chỉ 0x08000000 đối với STM32).
 
-   ASM derective .space {{{Stack_Size}}} thực hiện cấp phát 1 vùng có kích thước Stack_Size cho phân đoạn stack.   
+   ASM derective .space {{{Stack_Size}}} thực hiện cấp phát 1 vùng có kích thước {{{Stack_Size}}} cho phân đoạn stack.   
 
   Khai báo trương ứng trong linker script : gcc_arm.ld
 
