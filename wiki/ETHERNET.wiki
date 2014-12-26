@@ -33,3 +33,8 @@ The frame check sequence is a 4-octet cyclic redundancy check which allows detec
 = Interframe gap =
 
 Interframe gap is idle time between frames. After a frame has been sent, transmitters are required to transmit a minimum of 96 bits (12 octets) of idle line state before transmitting the next frame.
+
+------------------------------------------------
+TCP-IP Stack for STM32
+
+http://www.oryx-embedded.com/cyclone_tcp.html
