@@ -1,0 +1,13 @@
+#summary One-sentence summary of this page.
+
+= Sơ Lược Về Trình Biên Dịch ARMCC =
+
+Trình biên dịch cho phép bạn build ra các file chạy, liên kết các file đối tượng (.o), share các file đối tượng, hoặc chuyển đổi file ảnh sang các dạng format khác. 
+
+Một chương trình ứng dụng có thể bao gồm các thành phần sau :
+
+- Biên dịch source code ứng dụng chính (sử dụng armcc)
+- Assembling ARM asm code cho các lớp gắn liền với hardware, ví dụ các chương trình phục vụ ngắt (armasm).
+- Liên kết các file đối tượng (.o) thành file image (sử dụng armlink)
+- Convert image sang dạng format khác ví dụ .elf to hex, binary, srec (sử dụng fromelf)
+
