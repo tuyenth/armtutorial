@@ -15,7 +15,7 @@ Một chương trình ứng dụng có thể bao gồm các thành phần sau :
 
 [http://armtutorial.googlecode.com/svn/trunk/image/KEIL_01.png]
 
-== 2.1 Command lệnh ==
+== 2.2 Command Compiler ==
 
 Cú pháp điển hình như sau :
 
@@ -59,4 +59,12 @@ The following compiler options generate ARM code:
 
 --thumb : Thông báo compiler build thumb code cho ARM.
 
+== 2.3 Command Linker ==
 
+{{{ armlink shapes.o --info totals -o shapes.axf }}}
+
+Trong đó :
+
+-o : Thông báo ouput file .axf
+
+--info totals : Yêu cầu linker hiển thị thông tin Code và Data size cho các file object input.
