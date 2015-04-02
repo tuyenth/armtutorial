@@ -46,4 +46,10 @@ Figure 6 shows how to reorganize the single process to multiple process use case
 
 [http://m.eet.com/media/1195742/0713embWada06.png]
 
-Figure 6: Single process to multiple process use case using a dispatcher and multiple queues. 
+Figure 6: Single process to multiple process use case using a dispatcher and multiple queues.
+
+--------------------------------------------------
+
+= Reference = 
+
+[http://www.embedded.com/electronics-blogs/embedded-round-table/4419407/The-ring-buffer] 
