@@ -14,3 +14,9 @@ Một chương trình ứng dụng có thể bao gồm các thành phần sau :
 - Convert image sang dạng format khác ví dụ .elf to hex, binary, srec (sử dụng fromelf)
 
 [http://armtutorial.googlecode.com/svn/trunk/image/KEIL_01.png]
+
+== 2.1 Command lệnh ==
+
+Cú pháp điển hình như sau :
+
+{{{ armcc [options] file_1 … file_n }}}
