@@ -2,7 +2,7 @@
 
 = Sơ Lược Về Trình Biên Dịch ARMCC =
 
-= 2.1 Trình biên dịch ARMCC =
+== 2.1 Trình biên dịch ARMCC ==
 
 Trình biên dịch cho phép bạn build ra các file chạy, liên kết các file đối tượng (.o), share các file đối tượng, hoặc chuyển đổi file ảnh sang các dạng format khác. 
 
