@@ -40,3 +40,23 @@ Trong đó :
 -O1     : Cờ optimize level 1
 
 -o      : Xuất ra tên file .o 
+
+Để link file đối tượng, ta dùng command lệnh sau :
+
+{{{ armlink shapes.o --info totals -o shapes.axf }}}
+
+Sử dụng những tool debug có hỗ trợ file ELF, DWARF 2 hoặc DWARF 3 để chạy debugging.
+
+== Tùy chỉnh compiler cho ARM code ==
+
+The following compiler options generate ARM code:
+
+--arm : Thông báo cho compiler build Thumb code cho ARM.
+
+--arm_only : Thông báo cho compiler built arm code cho ARM.
+
+== Tùy chỉnh compiler cho ARM code ==
+
+
+
+
