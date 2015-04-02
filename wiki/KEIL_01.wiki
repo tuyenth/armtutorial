@@ -11,3 +11,4 @@ Một chương trình ứng dụng có thể bao gồm các thành phần sau :
 - Liên kết các file đối tượng (.o) thành file image (sử dụng armlink)
 - Convert image sang dạng format khác ví dụ .elf to hex, binary, srec (sử dụng fromelf)
 
+[http://armtutorial.googlecode.com/svn/trunk/image/KEIL_01.png]
