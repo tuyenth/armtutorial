@@ -1,4 +1,3 @@
-
 = Introduction =
 
 The ring buffer's first-in first-out data structure is useful tool for transmitting data between asynchronous processes. Here's how to bit bang one in C without C++'s Standard Template Library.
@@ -11,6 +10,40 @@ The ring buffer usually has two indices to the elements within the buffer. The d
 
 [http://m.eet.com/media/1195737/0713embWada01.png]
 
-             Figure 1: Structure of a ring buffer.
+                Figure 1: Structure of a ring buffer.
 
-The data gets PUT at the head index, and the data is read from the tail index. In essence, the newest data "grows" from the head index. The oldest data gets retrieved from the tail index. Figure 2 shows how the head and tail index varies in time using a linear array of elements for the buffer. 
+The data gets PUT at the head index, and the data is read from the tail index. In essence, the newest data "grows" from the head index. The oldest data gets retrieved from the tail index. Figure 2 shows how the head and tail index varies in time using a linear array of elements for the buffer.
+
+[http://m.eet.com/media/1195738/0713embWada02.png]
+
+           Figure 2: Linear buffer implementation of the ring buffer. 
+
+Use cases
+Single process to single process
+In general, the queue is used to serialize data from one process to another process. The serialization allows some elasticity in time between the processes. In many cases, the queue is used as a data buffer in some hardware interrupt service routine. This buffer will collect the data so that at some later time another process can fetch the data for further processing. This use case is the single process to process buffering case.
+
+This use case is typically found as an interface between some very high priority hardware service buffering data to some lower priority service running in some background loop. This simple buffering use case is shown in Figure 3. 
+
+[http://m.eet.com/media/1195739/0713embWada03.png]
+
+Figure 3: A single process to process buffer use case 
+
+In many cases, there will be a need for two queues for a single interrupt service. Using multiple queues is quite common for device drivers for serial devices such as RS-232, I2C or USB drivers. 
+
+Multiple processes to single process
+A little less common is the requirement to serialize many data streams into one receiving streams. These use cases are quite common in multi-threaded operating systems. In this case, there are many client threads requesting some type of serialization from some server or broker thread. The requests or messages are serialized into a single queue which is received by a single process. Figure 4 shows this use case.
+
+[http://m.eet.com/media/1195740/0713embWada04.png]
+
+Figure 4: Multiple processes to process use case.
+
+Single process to multiple processes
+The least common use case is the single process to multiple processes case. The difficulty here is to determine where to steer the output in real time. Usually, this is done by tagging the data elements in such a way that a broker can steer the data in some meaningful way. Figure 5 shows the single process to multiple processes use case. Since queues can be readily created, it is usually better to create multiple queues to solve this use case than it would be to use a single queue.
+
+[http://m.eet.com/media/1195741/0713embWada05.png]
+
+Figure 6 shows how to reorganize the single process to multiple process use case using a set of cascaded queues. In this case, we have inserted an Rx / Tx Broker Dispatcher service, which will parse the incoming requests to each of the individual process queues. 
+
+[http://m.eet.com/media/1195742/0713embWada06.png]
+
+Figure 6: Single process to multiple process use case using a dispatcher and multiple queues. 
