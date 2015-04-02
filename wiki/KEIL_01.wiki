@@ -68,3 +68,15 @@ Trong đó :
 -o : Thông báo ouput file .axf
 
 --info totals : Yêu cầu linker hiển thị thông tin Code và Data size cho các file object input.
+
+== 2.3 Command Assembler ==
+
+{{{ armasm [options] inputfile }}}
+
+Ví dụ :
+
+{{{ armasm --debug word.s }}}
+
+Link output file
+
+{{{ armlink word.o -o word.axf }}}
