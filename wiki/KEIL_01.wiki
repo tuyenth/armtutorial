@@ -20,3 +20,20 @@ Một chương trình ứng dụng có thể bao gồm các thành phần sau :
 Cú pháp điển hình như sau :
 
 {{{ armcc [options] file_1 … file_n }}}
+
+Chúng ta có thể đưa vào 1 hay nhiều input file, armcc sẽ biên dịch ra thành những file đối tượng có đuôi .o tương ứng.
+
+== Biên dịch file C++ ==
+
+Giả sử ta có source file có tên shapes.cpp, sử dụng command sau :
+
+{{{ armcc -c -cpp --debug -O1 shapes.cpp -o shape.o }}}
+
+Trong đó :
+
+-c      : Thông báo chỉ biên dịch ra file .o, không cần link.
+--cpp   : Thông báo file source là C++ (có đuôi .cpp)
+--debug : Thông báo cho trình biên dịch thêm vào debug symbol
+-O1     : Cờ optimize level 1
+-o      : Xuất ra tên file .o 
+
