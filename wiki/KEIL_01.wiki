@@ -1,6 +1,6 @@
 #summary One-sentence summary of this page.
 
-= Sơ Lược Về Trình Biên Dịch ARMCC =
+= SƠ LƯỢC VỀ TRÌNH BIÊN DỊCH ARMCC =
 
 == 2.1 Trình biên dịch ARMCC ==
 
