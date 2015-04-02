@@ -32,8 +32,11 @@ Giả sử ta có source file có tên shapes.cpp, sử dụng command sau :
 Trong đó :
 
 -c      : Thông báo chỉ biên dịch ra file .o, không cần link.
---cpp   : Thông báo file source là C++ (có đuôi .cpp)
---debug : Thông báo cho trình biên dịch thêm vào debug symbol
--O1     : Cờ optimize level 1
--o      : Xuất ra tên file .o 
 
+--cpp   : Thông báo file source là C++ (có đuôi .cpp)
+
+--debug : Thông báo cho trình biên dịch thêm vào debug symbol
+
+-O1     : Cờ optimize level 1
+
+-o      : Xuất ra tên file .o 
