@@ -207,4 +207,4 @@ Since my RingBuffer deals with reading and writing blocks of memory, I'm making 
 
 [http://c.learncodethehardway.org/book/ex44.html]
 
- 
+[http://c.learncodethehardway.org/book/ C language book] 
