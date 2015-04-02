@@ -57,6 +57,6 @@ The following compiler options generate ARM code:
 
 == Tùy chỉnh compiler cho ARM code ==
 
-
+--thumb : Thông báo compiler build thumb code cho ARM.
 
 
