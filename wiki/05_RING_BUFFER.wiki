@@ -1,0 +1,16 @@
+
+= Introduction =
+
+The ring buffer's first-in first-out data structure is useful tool for transmitting data between asynchronous processes. Here's how to bit bang one in C without C++'s Standard Template Library.
+
+The ring buffer is a circular software queue. This queue has a first-in-first-out (FIFO) data characteristic. These buffers are quite common and are found in many embedded systems. Usually, most developers write these constructs from scratch on an as-needed basis.
+
+The C++ language has the Standard Template Library (STL), which has a very easy-to-use set of class templates. This library enables the developer to create the queue and other lists relatively easily. For the purposes of this article, however, I am assuming that we do not have access to the C++ language. 
+
+The ring buffer usually has two indices to the elements within the buffer. The distance between the indices can range from zero (0) to the total number of elements within the buffer. The use of the dual indices means the queue length can shrink to zero, (empty), to the total number of elements, (full). Figure 1 shows the ring structure of the ring buffer, (FIFO) queue. 
+
+[http://m.eet.com/media/1195737/0713embWada01.png]
+
+             Figure 1: Structure of a ring buffer.
+
+The data gets PUT at the head index, and the data is read from the tail index. In essence, the newest data "grows" from the head index. The oldest data gets retrieved from the tail index. Figure 2 shows how the head and tail index varies in time using a linear array of elements for the buffer. 
