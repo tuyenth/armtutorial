@@ -56,6 +56,11 @@
 }}}
 
 
+= Memory access instructions =
+
+{{{
+   ADR{cond} Rd, label : PC = PC + label, Rd = PC
+}}}
 
 
 
