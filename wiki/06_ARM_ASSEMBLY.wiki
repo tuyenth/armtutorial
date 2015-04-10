@@ -66,6 +66,14 @@
   -> PC = PC + label, Rd = PC 
 }}}
 
+{{{
+  op {type}{cond} Rt, [Rn {, #offset}]; immediate offset
+  op {type}{cond} Rt, [Rn, #offset]!; pre-indexed
+  op {type}{cond} Rt, [Rn], #offset; post-indexed
+  opD      {cond} Rt, Rt2, [Rn {, #offset}]; immediate offset, two
+  opD      {cond} Rt, Rt2, [Rn, #offset]!; pre-indexed, two words
+  opD      {cond} Rt, Rt2, [Rn], #offset; post-indexed, two words
+}}}
 
 
 ------------------------------------------------
