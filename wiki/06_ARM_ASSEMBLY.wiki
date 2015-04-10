@@ -1,3 +1,21 @@
+= Intrinsic Functions =
+
+{{{
+  CPSIE I void     __enable_irq(void)
+  CPSID I void     __disable_irq(void)
+  CPSIE F void     __enable_fault_irq(void)
+  CPSID F void     __disable_fault_irq(void)
+  ISB     void     __ISB(void)
+  DSB     void     __DSB(void)
+  DMB     void     __DMB(void)
+  REV     uint32_t __REV(uint32_t int value)
+  REV16   uint32_t __REV16(uint32_t int value)
+  REVSH   uint32_t __REVSH(uint32_t int value)
+  RBIT    uint32_t __RBIT(uint32_t int value)
+  SEV     void     __SEV(void)
+  WFE     void     __WFE(void)
+  WFI     void     __WFI(void)
+}}}
 
 
 
