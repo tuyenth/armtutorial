@@ -59,7 +59,8 @@
 = Memory access instructions =
 
 {{{
-   ADR{cond} Rd, label : PC = PC + label, Rd = PC
+   ADR{cond} Rd, label
+   =>PC = PC + label, Rd = PC 
 }}}
 
 
