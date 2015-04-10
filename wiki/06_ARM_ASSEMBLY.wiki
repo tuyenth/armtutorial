@@ -60,9 +60,11 @@
 
 {{{
    ADR{cond} Rd, label
-   =>PC = PC + label, Rd = PC 
 }}}
 
+{{{
+  -> PC = PC + label, Rd = PC 
+}}}
 
 
 
