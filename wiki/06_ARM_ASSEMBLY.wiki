@@ -17,7 +17,20 @@
   WFI     void     __WFI(void)
 }}}
 
-
+{{{
+PRIMASK   Read  uint32_t __get_PRIMASK   (void)
+          Write void     __set_PRIMASK   (uint32_t value)
+FAULTMASK Read  uint32_t __get_FAULTMASK (void)
+          Write void     __set_FAULTMASK (uint32_t value)
+BASEPRI   Read  uint32_t __get_BASEPRI   (void)
+          Write void     __set_BASEPR I  (uint32_t value)
+CONTROL   Read  uint32_t __get_CONTROL   (void)
+          Write void     __set_CONTROL   (uint32_t value)
+MSP       Read  uint32_t __get_MSP       (void)
+          Write void     __set_MSP       (uint32_t TopOfMainStack)
+PSP       Read  uint32_t __get_PSP       (void)
+          Write void     __set_PSP       (uint32_t TopOfProcStack)
+}}}
 
 
 ------------------------------------------------
