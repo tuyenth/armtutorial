@@ -58,11 +58,14 @@
 
 = Memory access instructions =
 
-  {{{
-     ADR R1, TextMessage
-  }}}  
+{{{
+  ADR R1, TextMessage
+}}}  
 
+{{{
   => PC = PC + TextMessage, R1 = PC
+}}}
+
 
 ------------------------------------------------
 = Reference =
