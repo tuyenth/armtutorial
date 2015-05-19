@@ -1,0 +1,80 @@
+# SƠ LƯỢC VỀ TRÌNH BIÊN DỊCH ARMCC #
+
+## 2.1 Trình biên dịch ARMCC ##
+
+Trình biên dịch cho phép bạn build ra các file chạy, liên kết các file đối tượng (.o), share các file đối tượng, hoặc chuyển đổi file ảnh sang các dạng format khác.
+
+Một chương trình ứng dụng có thể bao gồm các thành phần sau :
+
+- Biên dịch source code ứng dụng chính (sử dụng armcc)
+- Assembling ARM asm code cho các lớp gắn liền với hardware, ví dụ các chương trình phục vụ ngắt (armasm).
+- Liên kết các file đối tượng (.o) thành file image (sử dụng armlink)
+- Convert image sang dạng format khác ví dụ .elf to hex, binary, srec (sử dụng fromelf)
+
+![http://armtutorial.googlecode.com/svn/trunk/image/KEIL_01.png](http://armtutorial.googlecode.com/svn/trunk/image/KEIL_01.png)
+
+## 2.2 Command Compiler ##
+
+Cú pháp điển hình như sau :
+
+` armcc [options] file_1 … file_n `
+
+Chúng ta có thể đưa vào 1 hay nhiều input file, armcc sẽ biên dịch ra thành những file đối tượng có đuôi .o tương ứng.
+
+## Biên dịch file C++ ##
+
+Giả sử ta có source file có tên shapes.cpp, sử dụng command sau :
+
+` armcc -c -cpp --debug -O1 shapes.cpp -o shape.o `
+
+Trong đó :
+
+-c      : Thông báo chỉ biên dịch ra file .o, không cần link.
+
+--cpp   : Thông báo file source là C++ (có đuôi .cpp)
+
+--debug : Thông báo cho trình biên dịch thêm vào debug symbol
+
+-O1     : Cờ optimize level 1
+
+-o      : Xuất ra tên file .o
+
+Để link file đối tượng, ta dùng command lệnh sau :
+
+` armlink shapes.o --info totals -o shapes.axf `
+
+Sử dụng những tool debug có hỗ trợ file ELF, DWARF 2 hoặc DWARF 3 để chạy debugging.
+
+## Tùy chỉnh compiler cho ARM code ##
+
+The following compiler options generate ARM code:
+
+--arm : Thông báo cho compiler build Thumb code cho ARM.
+
+--arm\_only : Thông báo cho compiler built arm code cho ARM.
+
+## Tùy chỉnh compiler cho ARM code ##
+
+--thumb : Thông báo compiler build thumb code cho ARM.
+
+## 2.3 Command Linker ##
+
+` armlink shapes.o --info totals -o shapes.axf `
+
+Trong đó :
+
+-o : Thông báo ouput file .axf
+
+--info totals : Yêu cầu linker hiển thị thông tin Code và Data size cho các file object input.
+
+## 2.3 Command Assembler ##
+
+` armasm [options] inputfile `
+
+Ví dụ :
+
+` armasm --debug word.s `
+
+Link output file
+
+` armlink word.o -o word.axf `

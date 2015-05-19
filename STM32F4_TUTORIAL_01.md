@@ -1,0 +1,3 @@
+# Introduction #
+
+http://stm32f4-discovery.com/2015/01/properly-set-clock-speed-stm32f4xx-devices/

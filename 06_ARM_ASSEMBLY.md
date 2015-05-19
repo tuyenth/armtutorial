@@ -1,0 +1,75 @@
+# Intrinsic Functions #
+
+```
+  CPSIE I void     __enable_irq(void)
+  CPSID I void     __disable_irq(void)
+  CPSIE F void     __enable_fault_irq(void)
+  CPSID F void     __disable_fault_irq(void)
+  ISB     void     __ISB(void)
+  DSB     void     __DSB(void)
+  DMB     void     __DMB(void)
+  REV     uint32_t __REV(uint32_t int value)
+  REV16   uint32_t __REV16(uint32_t int value)
+  REVSH   uint32_t __REVSH(uint32_t int value)
+  RBIT    uint32_t __RBIT(uint32_t int value)
+  SEV     void     __SEV(void)
+  WFE     void     __WFE(void)
+  WFI     void     __WFI(void)
+```
+
+```
+  PRIMASK   Read  uint32_t __get_PRIMASK   (void)
+            Write void     __set_PRIMASK   (uint32_t value)
+  FAULTMASK Read  uint32_t __get_FAULTMASK (void)
+            Write void     __set_FAULTMASK (uint32_t value)
+  BASEPRI   Read  uint32_t __get_BASEPRI   (void)
+            Write void     __set_BASEPR I  (uint32_t value)
+  CONTROL   Read  uint32_t __get_CONTROL   (void)
+            Write void     __set_CONTROL   (uint32_t value)
+  MSP       Read  uint32_t __get_MSP       (void)
+            Write void     __set_MSP       (uint32_t TopOfMainStack)
+  PSP       Read  uint32_t __get_PSP       (void)
+            Write void     __set_PSP       (uint32_t TopOfProcStack)
+```
+
+
+# Condition code suffixes #
+
+```
+
+  EQ       Z = 1              Equal
+  NE       Z = 0              Not equal
+  CS or HS C = 1              Higher or same, unsigned ≥
+  CC or LO C = 0              Lower, unsigned < 
+  MI       N = 1              Negative
+  PL       N = 0              Positive or zero
+  VS       V = 1              Overflow
+  VC       V = 0              No overflow
+  HI       C = 1 and Z = 0    Higher, unsigned > 
+  LS       C = 0 or  Z = 1    Lower or same, unsigned ≤
+  GE       N = V              Greater than or equal, signed ≥
+  LT       N!= V              Less than, signed <
+  GT       Z = 0 and N = V    Greater than, signed >
+  LE       Z = 1 and N != V   Less than or equal, signed ≤
+  AL       Can have any value Always.This is the default when no suffix is specified
+
+```
+
+
+# Memory access instructions #
+
+```
+  ADR R1, TextMessage
+```
+
+```
+  => PC = PC + TextMessage, R1 = PC
+```
+
+
+
+---
+
+# Reference #
+
+http://www.st.com/web/en/resource/technical/document/programming_manual/DM00046982.pdf

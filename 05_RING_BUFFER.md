@@ -1,0 +1,212 @@
+# Introduction #
+
+The ring buffer's first-in first-out data structure is useful tool for transmitting data between asynchronous processes. Here's how to bit bang one in C without C++'s Standard Template Library.
+
+The ring buffer is a circular software queue. This queue has a first-in-first-out (FIFO) data characteristic. These buffers are quite common and are found in many embedded systems. Usually, most developers write these constructs from scratch on an as-needed basis.
+
+The C++ language has the Standard Template Library (STL), which has a very easy-to-use set of class templates. This library enables the developer to create the queue and other lists relatively easily. For the purposes of this article, however, I am assuming that we do not have access to the C++ language.
+
+The ring buffer usually has two indices to the elements within the buffer. The distance between the indices can range from zero (0) to the total number of elements within the buffer. The use of the dual indices means the queue length can shrink to zero, (empty), to the total number of elements, (full). Figure 1 shows the ring structure of the ring buffer, (FIFO) queue.
+
+![http://m.eet.com/media/1195737/0713embWada01.png](http://m.eet.com/media/1195737/0713embWada01.png)
+
+> Figure 1: Structure of a ring buffer.
+
+The data gets PUT at the head index, and the data is read from the tail index. In essence, the newest data "grows" from the head index. The oldest data gets retrieved from the tail index. Figure 2 shows how the head and tail index varies in time using a linear array of elements for the buffer.
+
+![http://m.eet.com/media/1195738/0713embWada02.png](http://m.eet.com/media/1195738/0713embWada02.png)
+
+> Figure 2: Linear buffer implementation of the ring buffer.
+
+Use cases
+Single process to single process
+In general, the queue is used to serialize data from one process to another process. The serialization allows some elasticity in time between the processes. In many cases, the queue is used as a data buffer in some hardware interrupt service routine. This buffer will collect the data so that at some later time another process can fetch the data for further processing. This use case is the single process to process buffering case.
+
+This use case is typically found as an interface between some very high priority hardware service buffering data to some lower priority service running in some background loop. This simple buffering use case is shown in Figure 3.
+
+![http://m.eet.com/media/1195739/0713embWada03.png](http://m.eet.com/media/1195739/0713embWada03.png)
+
+Figure 3: A single process to process buffer use case
+
+In many cases, there will be a need for two queues for a single interrupt service. Using multiple queues is quite common for device drivers for serial devices such as RS-232, I2C or USB drivers.
+
+Multiple processes to single process
+A little less common is the requirement to serialize many data streams into one receiving streams. These use cases are quite common in multi-threaded operating systems. In this case, there are many client threads requesting some type of serialization from some server or broker thread. The requests or messages are serialized into a single queue which is received by a single process. Figure 4 shows this use case.
+
+![http://m.eet.com/media/1195740/0713embWada04.png](http://m.eet.com/media/1195740/0713embWada04.png)
+
+Figure 4: Multiple processes to process use case.
+
+Single process to multiple processes
+The least common use case is the single process to multiple processes case. The difficulty here is to determine where to steer the output in real time. Usually, this is done by tagging the data elements in such a way that a broker can steer the data in some meaningful way. Figure 5 shows the single process to multiple processes use case. Since queues can be readily created, it is usually better to create multiple queues to solve this use case than it would be to use a single queue.
+
+![http://m.eet.com/media/1195741/0713embWada05.png](http://m.eet.com/media/1195741/0713embWada05.png)
+
+Figure 6 shows how to reorganize the single process to multiple process use case using a set of cascaded queues. In this case, we have inserted an Rx / Tx Broker Dispatcher service, which will parse the incoming requests to each of the individual process queues.
+
+![http://m.eet.com/media/1195742/0713embWada06.png](http://m.eet.com/media/1195742/0713embWada06.png)
+
+Figure 6: Single process to multiple process use case using a dispatcher and multiple queues.
+
+# Implement in C #
+
+```
+#ifndef _lcthw_RingBuffer_h
+#define _lcthw_RingBuffer_h
+
+#include <lcthw/bstrlib.h>
+
+typedef struct {
+    char *buffer;
+    int length;
+    int start;
+    int end;
+} RingBuffer;
+
+RingBuffer *RingBuffer_create(int length);
+
+void RingBuffer_destroy(RingBuffer *buffer);
+
+int RingBuffer_read(RingBuffer *buffer, char *target, int amount);
+
+int RingBuffer_write(RingBuffer *buffer, char *data, int length);
+
+int RingBuffer_empty(RingBuffer *buffer);
+
+int RingBuffer_full(RingBuffer *buffer);
+
+int RingBuffer_available_data(RingBuffer *buffer);
+
+int RingBuffer_available_space(RingBuffer *buffer);
+
+bstring RingBuffer_gets(RingBuffer *buffer, int amount);
+
+#define RingBuffer_available_data(B) (((B)->end + 1) % (B)->length - (B)->start - 1)
+
+#define RingBuffer_available_space(B) ((B)->length - (B)->end - 1)
+
+#define RingBuffer_full(B) (RingBuffer_available_data((B)) - (B)->length == 0)
+
+#define RingBuffer_empty(B) (RingBuffer_available_data((B)) == 0)
+
+#define RingBuffer_puts(B, D) RingBuffer_write((B), bdata((D)), blength((D)))
+
+#define RingBuffer_get_all(B) RingBuffer_gets((B), RingBuffer_available_data((B)))
+
+#define RingBuffer_starts_at(B) ((B)->buffer + (B)->start)
+
+#define RingBuffer_ends_at(B) ((B)->buffer + (B)->end)
+
+#define RingBuffer_commit_read(B, A) ((B)->start = ((B)->start + (A)) % (B)->length)
+
+#define RingBuffer_commit_write(B, A) ((B)->end = ((B)->end + (A)) % (B)->length)
+
+#endif
+
+Looking at the data structure you see I have a buffer, start and end. A RingBuffer does nothing more than move the start and end around the buffer so that it "loops" whenever it reaches the buffer's end. Doing this gives the illusion of an infinite read device in a small space. I then have a bunch of macros that do various calculations based on this.
+
+Here's the implementation which is a much better explanation of how this works:
+
+#undef NDEBUG
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <lcthw/dbg.h>
+#include <lcthw/ringbuffer.h>
+
+RingBuffer *RingBuffer_create(int length)
+{
+    RingBuffer *buffer = calloc(1, sizeof(RingBuffer));
+    buffer->length  = length + 1;
+    buffer->start = 0;
+    buffer->end = 0;
+    buffer->buffer = calloc(buffer->length, 1);
+
+    return buffer;
+}
+
+void RingBuffer_destroy(RingBuffer *buffer)
+{
+    if(buffer) {
+        free(buffer->buffer);
+        free(buffer);
+    }
+}
+
+int RingBuffer_write(RingBuffer *buffer, char *data, int length)
+{
+    if(RingBuffer_available_data(buffer) == 0) {
+        buffer->start = buffer->end = 0;
+    }
+
+    check(length <= RingBuffer_available_space(buffer),
+            "Not enough space: %d request, %d available",
+            RingBuffer_available_data(buffer), length);
+
+    void *result = memcpy(RingBuffer_ends_at(buffer), data, length);
+    check(result != NULL, "Failed to write data into buffer.");
+
+    RingBuffer_commit_write(buffer, length);
+
+    return length;
+error:
+    return -1;
+}
+
+int RingBuffer_read(RingBuffer *buffer, char *target, int amount)
+{
+    check_debug(amount <= RingBuffer_available_data(buffer),
+            "Not enough in the buffer: has %d, needs %d",
+            RingBuffer_available_data(buffer), amount);
+
+    void *result = memcpy(target, RingBuffer_starts_at(buffer), amount);
+    check(result != NULL, "Failed to write buffer into data.");
+
+    RingBuffer_commit_read(buffer, amount);
+
+    if(buffer->end == buffer->start) {
+        buffer->start = buffer->end = 0;
+    }
+
+    return amount;
+error:
+    return -1;
+}
+
+bstring RingBuffer_gets(RingBuffer *buffer, int amount)
+{
+    check(amount > 0, "Need more than 0 for gets, you gave: %d ", amount);
+    check_debug(amount <= RingBuffer_available_data(buffer),
+            "Not enough in the buffer.");
+
+    bstring result = blk2bstr(RingBuffer_starts_at(buffer), amount);
+    check(result != NULL, "Failed to create gets result.");
+    check(blength(result) == amount, "Wrong result length.");
+
+    RingBuffer_commit_read(buffer, amount);
+    assert(RingBuffer_available_data(buffer) >= 0 && "Error in read commit.");
+
+    return result;
+error:
+    return NULL;
+}
+
+This is all there is to a basic RingBuffer implementation. You can read and write blocks of data to it. You can ask how much is in it and how much space it has. There are some fancier ring buffers that use tricks in the OS to create an imaginary infinite store, but those aren't portable.
+
+Since my RingBuffer deals with reading and writing blocks of memory, I'm making sure that any time end == start then I reset them to 0 (zero) so that they go to the beginning of the buffer. In the Wikipedia version it wasn't writing blocks of data, so it only had to move end and start around in a circle. To better handle blocks you have to drop to the beginning of the internal buffer whenever the data is empty.
+
+
+```
+
+
+---
+
+
+# Reference #
+
+http://www.embedded.com/electronics-blogs/embedded-round-table/4419407/The-ring-buffer
+
+http://c.learncodethehardway.org/book/ex44.html
+
+[C language book](http://c.learncodethehardway.org/book/)
